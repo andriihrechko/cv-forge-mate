@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.btn-light-blue {
+  --bs-btn-bg: #90CAF9;
+  --bs-btn-border-color: #90CAF9;
+  --bs-btn-color: #0D47A1;
+
+  --bs-btn-hover-bg: #64B5F6;
+  --bs-btn-hover-border-color: #64B5F6;
+  --bs-btn-hover-color: #0D47A1;
+
+  --bs-btn-active-bg: #42A5F5;
+  --bs-btn-active-border-color: #42A5F5;
+  --bs-btn-active-color: #0D47A1;
+}
+
+
+
+
