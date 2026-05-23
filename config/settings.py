@@ -1,10 +1,19 @@
 import os
 from pathlib import Path
 
+from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-((=30!+m*vu(ghjmy(%rprl=oxkn(nk4vjq0d)ace(_e&l%b(q"
+
+AUTH_USER_MODEL = "users.User"
+
+LOGIN_REDIRECT_URL = "/"
+
+LOGIN_URL = reverse_lazy("users:login")
+
+LOGOUT_REDIRECT_URL = "/"
 
 DEBUG = True
 
@@ -17,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "widget_tweaks",
     "users",
 ]
 

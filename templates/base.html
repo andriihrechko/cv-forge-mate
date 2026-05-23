@@ -11,6 +11,7 @@
   {% block styles %}{% endblock %}
 
   <script src="https://kit.fontawesome.com/745632e256.js" crossorigin="anonymous"></script>
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -22,25 +23,29 @@
     </a>
 
     <nav class="d-flex align-items-center">
-      <div class="nav me-4">
+      <div class="navbar nav me-4">
         <a href="#" class="nav-link link-secondary px-2">Home</a>
         <a href="#" class="nav-link link-secondary px-2">Catalog</a>
         <a href="#" class="nav-link link-secondary px-2">About</a>
       </div>
       <div class="d-flex align-items-center border-start">
-        <a href="#" class="nav-link link-secondary px-3 mx-3">Login</a>
-        <a href="#" class="btn btn-light-blue px-3">Sign up</a>
+        {% if user.is_authenticated %}
+          <a href="#" class="nav-link link-secondary px-3 mx-3">{{ user.username }}</a>
+        {% else %}
+          <a href="{% url "users:login" %}" class="nav-link link-secondary px-3 mx-3">Login</a>
+          <a href="{% url "users:register" %}" class="btn btn-light-blue px-3">Sign-in</a>
+        {% endif %}
       </div>
     </nav>
   </div>
 </header>
 
-<main class="flex-grow-1">
+<main class="flex-grow-1 my-4">
   {% block content %}
   {% endblock %}
 </main>
 
-<footer class="text-secondary pt-3 pb-2">
+<footer class="bg-dark text-secondary pt-3 pb-2">
   <div class="container text-center">
     <nav class="nav justify-content-center">
       <a href="#" class="nav-link link-secondary px-2">Home</a>
@@ -52,6 +57,6 @@
     <p class="text-secondary small mb-2">© 2026 CVForge</p>
   </div>
 </footer>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 </html>

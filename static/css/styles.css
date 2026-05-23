@@ -18,6 +18,18 @@ body {
   --bs-btn-active-color: #0D47A1;
 }
 
+.btn-outline-light-blue {
+  --bs-btn-bg: transparent;
+  --bs-btn-border-color: #90CAF9;
+  --bs-btn-color: #0D47A1;
 
+  --bs-btn-hover-bg: #90CAF9;
+  --bs-btn-hover-border-color: #90CAF9;
+  --bs-btn-hover-color: #0D47A1;
 
+  --bs-btn-active-bg: #64B5F6;
+  --bs-btn-active-border-color: #64B5F6;
+  --bs-btn-active-color: #0D47A1;
 
+  --bs-btn-focus-shadow-rgb: 144, 202, 249;
+}
