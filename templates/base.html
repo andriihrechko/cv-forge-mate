@@ -18,14 +18,15 @@
 <header class="sticky-top bg-white border-bottom shadow-sm">
   <div class="container py-3 d-flex flex-wrap align-items-center justify-content-between">
 
-    <a href="{% url "catalog:home" %}" class="d-flex align-items-center text-dark text-decoration-none h4 fw-semibold mb-0 me-4">
+    <a href="{% url "catalog:home" %}"
+       class="d-flex align-items-center text-dark text-decoration-none h4 fw-semibold mb-0 me-4">
       <img src="{% static "images/logo.svg" %}" alt="CVForge Logo" width="32" height="32" class="me-2"> CVForge
     </a>
 
     <nav class="d-flex align-items-center">
       <div class="navbar nav me-4">
         <a href="{% url "catalog:home" %}" class="nav-link link-secondary px-2">Home</a>
-        <a href="#" class="nav-link link-secondary px-2">Catalog</a>
+        <a href="{% url "catalog:catalog" %}" class="nav-link link-secondary px-2">Catalog</a>
         <a href="{% url "catalog:about" %}" class="nav-link link-secondary px-2">About</a>
       </div>
       <div class="d-flex align-items-center border-start">
@@ -40,24 +41,24 @@
   </div>
 </header>
 
-<main class="bg-light-grey">
-  <div class="flex-grow-1 my-4">
-    {% block content %}
-    {% endblock %}
-  </div>
+<main class="flex-grow-1 bg-light-grey">
+  {% block content %}
+  {% endblock %}
 </main>
 
 <footer class="bg-dark text-secondary pt-3 pb-2">
   <div class="container text-center">
     <nav class="nav justify-content-center">
       <a href="{% url "catalog:home" %}" class="nav-link link-secondary px-2">Home</a>
-      <a href="#" class="nav-link link-secondary px-2">Templates</a>
-      <a href="#" class="nav-link link-secondary px-2">About</a>
+      <a href="{% url "catalog:catalog" %}" class="nav-link link-secondary px-2">Catalog</a>
+      <a href="{% url "catalog:about" %}" class="nav-link link-secondary px-2">About</a>
     </nav>
     <hr class="border-secondary my-3 mx-auto" style="max-width: 1000px;">
     <p class="text-secondary small mb-2">© 2026 CVForge</p>
   </div>
 </footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
 </body>
 </html>
