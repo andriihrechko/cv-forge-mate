@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<section class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+
+                    <h2 class="fw-bold mb-3">Hey there! I'm the creator of CV Forge.</h2>
+                    <p class="text-muted leading-relaxed">
+                        As a junior developer entering the tech industry, I faced the exact same problem every job seeker encounters: **creating a clean, properly formatted resume is a nightmare**. I spent hours fighting with text editors, adjusting margins, and worrying if my CV would pass automated applicant tracking systems (ATS).
+                    </p>
+                    <p class="text-muted leading-relaxed">
+                        That's when I decided to turn this frustration into action. I built this tool as a personal project to solve my own problem—and soon realized it could help thousands of other candidates who want to focus on their skills rather than fighting with document layouts.
+                    </p>
+
+                    <!-- Quote Block using Bootstrap classes -->
+                    <div class="p-4 bg-light border-start border-primary border-4 rounded-end my-4">
+                        <p class="fst-italic mb-2 text-dark">"My goal is simple: to provide a straightforward, no-nonsense CV generator that builds clean, professional, and employer-ready resumes in minutes. No hidden fees, no messy design choices—just what works."</p>
+                        <span class="small text-secondary fw-semibold">— The Developer</span>
+                    </div>
+
+                    <h3 class="fw-bold h4 mt-4 mb-3">What makes this project different?</h3>
+                    <ul class="list-unstyled">
+                        <li class="mb-2 d-flex align-items-start">
+                            <i class="bi bi-heart-fill text-danger me-2 mt-1"></i>
+                            <span><strong>Built by a peer:</strong> I know exactly what you need because I am going through the same career-building journey.</span>
+                        </li>
+                        <li class="mb-2 d-flex align-items-start">
+                            <i class="bi bi-code-slash text-primary me-2 mt-1"></i>
+                            <span><strong>Clean Code & Layouts:</strong> The templates focus strictly on readability and what recruiters actually want to see.</span>
+                        </li>
+                        <li class="mb-2 d-flex align-items-start">
+                            <i class="bi bi-arrow-repeat text-success me-2 mt-1"></i>
+                            <span><strong>Constantly Improving:</strong> As I grow as a developer, I regularly update this app with new features and suggestions from users.</span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
