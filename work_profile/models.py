@@ -6,6 +6,7 @@ from work_profile.choices import (
     SkillChoice,
     LanguageChoice,
     LanguageLevelChoices,
+    DegreeChoices,
 )
 
 
@@ -31,7 +32,8 @@ class Social(models.Model):
     )
     type = models.CharField(
         max_length=2,
-        choices=NetworkChoice.choices
+        choices=NetworkChoice.choices,
+        default=NetworkChoice.INSTAGRAM
     )
     link = models.URLField(max_length=255)
 
@@ -54,7 +56,8 @@ class Skill(models.Model):
     )
     type = models.CharField(
         max_length=20,
-        choices=SkillChoice.choices
+        choices=SkillChoice.choices,
+        default=SkillChoice.PYTHON
     )
     experience = models.IntegerField(
         blank=True,
@@ -78,8 +81,16 @@ class Language(models.Model):
         on_delete=models.CASCADE,
         related_name="languages"
     )
-    language = models.CharField(max_length=20, choices=LanguageChoice.choices)
-    level = models.CharField(max_length=255,  choices=LanguageLevelChoices.choices)
+    language = models.CharField(
+        max_length=20,
+        choices=LanguageChoice.choices,
+        default=LanguageChoice.ENGLISH
+    )
+    level = models.CharField(
+        max_length=255,
+        choices=LanguageLevelChoices.choices,
+        default=LanguageLevelChoices.C2
+    )
 
     class Meta:
         constraints = [
@@ -104,10 +115,12 @@ class EducationExperience(models.Model):
     started_at = models.DateField()
     ended_at = models.DateField(blank=True, null=True)
     degree = models.CharField(
-        max_length=64
+        max_length=5,
+        choices=DegreeChoices.choices,
+        default=DegreeChoices.BACHELOR
     )
     specialty = models.CharField(
-        max_length=64
+        max_length=63
     )
 
     class Meta:

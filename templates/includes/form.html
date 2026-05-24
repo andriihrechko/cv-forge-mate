@@ -1,7 +1,7 @@
 {% load widget_tweaks %}
 
 {% if form.non_field_errors %}
-  <div class="alert alert-danger small">
+  <div class="alert alert-danger small p-2">
     {% for error in form.non_field_errors %}
       {{ error }}
     {% endfor %}

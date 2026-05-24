@@ -124,3 +124,11 @@ class LanguageLevelChoices(models.TextChoices):
     B2 = "B2", "Upper-Intermediate"
     C1 = "C1", "Advanced"
     C2 = "C2", "Native"
+
+
+class DegreeChoices(models.TextChoices):
+    ASSOCIATE = "ASSOC", "Associate"
+    BACHELOR = "BACH", "Bachelor"
+    MASTER = "MAST", "Master"
+    DOCTORATE = "DOC", "Doctorate"
+    PROFESSIONAL = "PROF", "Professional"

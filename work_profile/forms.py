@@ -1,7 +1,15 @@
 from django import forms
+from django.utils import timezone
 
 from users.models import User
-from work_profile.models import WorkProfile
+from work_profile.models import (
+    WorkProfile,
+    Social,
+    Skill,
+    Language,
+    WorkExperience,
+    EducationExperience
+)
 
 
 class UserDataForm(forms.ModelForm):
@@ -17,3 +25,102 @@ class WorkProfileForm(forms.ModelForm):
         widgets = {
             "summary": forms.Textarea(attrs={"rows": 3})
         }
+
+
+class SocialForm(forms.ModelForm):
+    class Meta:
+        model = Social
+        fields = ["type", "link"]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        social_type = cleaned_data.get("type")
+        profile = self.instance.profile
+        if profile and social_type:
+            exists = Social.objects.filter(profile=profile, type=social_type).exclude(pk=self.instance.pk).exists()
+            if exists:
+                self.add_error(
+                    None, f"This social network already exists, update it if you want."
+                )
+        return cleaned_data
+
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        fields = ["type", "experience"]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        skill_type = cleaned_data.get("type")
+        profile = self.instance.profile
+        if profile and skill_type:
+            exists = Skill.objects.filter(profile=profile, type=skill_type).exclude(pk=self.instance.pk).exists()
+            if exists:
+                self.add_error(
+                    None, f"This skill already exists, update it if you want."
+                )
+        return cleaned_data
+
+
+class LanguageForm(forms.ModelForm):
+    class Meta:
+        model = Language
+        fields = ["language", "level"]
+
+    def clean(self):
+        cleaned_data = super().clean()
+        language = cleaned_data.get("language")
+        profile = self.instance.profile
+        if profile and language:
+            exists = Language.objects.filter(profile=profile, language=language).exclude(pk=self.instance.pk).exists()
+            if exists:
+                self.add_error(
+                    None, f"This language already exists, update it if you want."
+                )
+        return cleaned_data
+
+
+class WorkExperienceForm(forms.ModelForm):
+    started_at = forms.DateField(
+        initial=timezone.now,
+        widget=forms.DateInput(
+            attrs={"type": "date", "class": "form-control"}, format="%Y-%m-%d"
+        ),
+        input_formats=["%Y-%m-%d"],
+    )
+    ended_at = forms.DateField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={"type": "date", "class": "form-control"}, format="%Y-%m-%d"
+        ),
+        input_formats=["%Y-%m-%d"],
+    )
+
+    class Meta:
+        model = WorkExperience
+        fields = ["company", "position", "started_at", "ended_at", "description"]
+        widgets = {
+            "description": forms.Textarea(attrs={"rows": 3})
+        }
+
+
+class EducationExperienceForm(forms.ModelForm):
+    started_at = forms.DateField(
+        initial=timezone.now,
+        widget=forms.DateInput(
+            attrs={"type": "date", "class": "form-control"}, format="%Y-%m-%d"
+        ),
+        input_formats=["%Y-%m-%d"],
+    )
+    ended_at = forms.DateField(
+        required=False,
+        widget=forms.DateInput(
+            attrs={"type": "date", "class": "form-control"}, format="%Y-%m-%d"
+        ),
+        input_formats=["%Y-%m-%d"],
+    )
+
+    class Meta:
+        model = EducationExperience
+        fields = ["institution", "started_at", "ended_at", "degree", "specialty"]
