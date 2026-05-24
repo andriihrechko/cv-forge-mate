@@ -14,10 +14,10 @@ class WorkProfile(models.Model):
         get_user_model(),
         on_delete=models.CASCADE
     )
-    desired_position = models.CharField(max_length=255)
-    phone_number = models.CharField(max_length=20)
-    location = models.CharField(max_length=255)
-    summary = models.CharField(max_length=1000)
+    desired_position = models.CharField(max_length=255, blank=True, null=True)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+    summary = models.TextField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -110,6 +110,9 @@ class EducationExperience(models.Model):
         max_length=64
     )
 
+    class Meta:
+        ordering = ("-started_at",)
+
     def __str__(self):
         return f"{self.profile.user.username} - {self.degree}"
 
@@ -129,6 +132,9 @@ class WorkExperience(models.Model):
     started_at = models.DateField()
     ended_at = models.DateField(blank=True, null=True)
     description = models.TextField()
+
+    class Meta:
+        ordering = ("-started_at",)
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.position}"

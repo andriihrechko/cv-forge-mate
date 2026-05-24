@@ -97,6 +97,31 @@ STATIC_URL = "static/"
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
+
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": "{message}",
+            "style": "{",
+        },
+    },
+    "handlers": {
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        },
+    },
+    "loggers": {
+        "django.db.backends": {
+            "handlers": ["console"],
+            "level": "DEBUG",
+            "propagate": False,
+        },
+    },
+}
