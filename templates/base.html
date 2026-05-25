@@ -8,10 +8,14 @@
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}">
   {% block styles %}{% endblock %}
 
-  <script src="https://kit.fontawesome.com/745632e256.js" crossorigin="anonymous"></script>
-  <link rel="icon" type="image/svg+xml" href="{% static 'images/logo.svg' %}">
+  <script src="https://kit.fontawesome.com/745632e256.js"
+          crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.0"
+          integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw"
+          crossorigin="anonymous"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -26,7 +30,7 @@
     <nav class="d-flex align-items-center">
       <div class="navbar nav me-4">
         <a href="{% url "catalog:home" %}" class="nav-link link-secondary px-2">Home</a>
-        <a href="#" class="nav-link link-secondary px-2">Catalog</a>
+        <a href="{% url "catalog:catalog" %}" class="nav-link link-secondary px-2">Catalog</a>
         <a href="{% url "catalog:about" %}" class="nav-link link-secondary px-2">About</a>
       </div>
       <div class="d-flex align-items-center border-start">
@@ -50,7 +54,7 @@
   <div class="container text-center">
     <nav class="nav justify-content-center">
       <a href="{% url "catalog:home" %}" class="nav-link link-secondary px-2">Home</a>
-      <a href="#" class="nav-link link-secondary px-2">Catalog</a>
+      <a href="{% url "catalog:catalog" %}" class="nav-link link-secondary px-2">Catalog</a>
       <a href="{% url "catalog:about" %}" class="nav-link link-secondary px-2">About</a>
     </nav>
     <hr class="border-secondary my-3 mx-auto" style="max-width: 1000px;">

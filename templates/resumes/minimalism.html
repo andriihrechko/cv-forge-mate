@@ -1,0 +1,142 @@
+<div class="resume-pdf-container">
+
+  <div class="resume-left-sidebar">
+
+    <div class="profile-header">
+      <h2 class="resume-name">
+        {% if user.get_full_name %}
+          {{ user.first_name }}<br>{{ user.last_name }}
+        {% else %}
+          John<br>Doe
+        {% endif %}
+      </h2>
+      <p class="resume-subtitle">{{ user.workprofile.desired_position|default:"Developer" }}</p>
+    </div>
+
+    <div class="resume-section">
+      <h3 class="section-title">CONTACTS</h3>
+      <p class="aside-item">{{ user.workprofile.location|default:"Kyiv, Ukraine" }}</p>
+      <p class="aside-item">{{ user.workprofile.phone_number|default:"+380981234567" }}</p>
+      <p class="aside-item">{{ user.email|default:"john.doe.backend@gmail.com" }}</p>
+    </div>
+
+    <div class="resume-section">
+      <h3 class="section-title">SOCIALS</h3>
+      <div class="socials-list">
+        {% for social in user.workprofile.socials.all %}
+          <p class="aside-item">
+            <i class="fa-brands fa-{{ social.get_type_display|lower }}"></i>
+            <a href="{{ social.link }}">{{ social.get_type_display }}</a>
+          </p>
+        {% empty %}
+          <p class="aside-item">
+            <i class="fa-brands fa-instagram"></i>
+            <a href="#">Instagram</a>
+          </p>
+          <p class="aside-item">
+            <i class="fa-brands fa-linkedin"></i>
+            <a href="#">LinkedIn</a>
+          </p>
+          <p class="aside-item">
+            <i class="fa-brands fa-telegram"></i>
+            <a href="#">Telegram</a>
+          </p>
+          <p class="aside-item">
+            <i class="fa-brands fa-github"></i>
+            <a href="#">GitHub</a>
+          </p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="resume-section">
+      <h3 class="section-title">LANGUAGES</h3>
+      {% for lang in user.workprofile.languages.all %}
+        <p class="aside-item"><b>{{ lang.get_language_display }}</b> - {{ lang.get_level_display }}</p>
+      {% empty %}
+        <p class="aside-item"><b>Ukrainian</b> - Native</p>
+        <p class="aside-item"><b>English</b> - Advanced</p>
+        <p class="aside-item"><b>German</b> - Advanced</p>
+      {% endfor %}
+    </div>
+
+    <div class="resume-section">
+      <h3 class="section-title">SKILLS</h3>
+      {% for skill in user.workprofile.skills.all %}
+        <p class="aside-item">
+          <b>{{ skill.get_type_display|upper }}</b> - {{ skill.experience }} year{{ skill.experience|pluralize }}
+        </p>
+      {% empty %}
+        <p class="aside-item"><b>POSTGRESQL</b> - 3 years</p>
+        <p class="aside-item"><b>DOCKER</b> - 1 year</p>
+        <p class="aside-item"><b>REDIS</b> - 2 years</p>
+        <p class="aside-item"><b>FASTAPI</b> - 1 year</p>
+        <p class="aside-item"><b>AWS</b> - 2 years</p>
+        <p class="aside-item"><b>GIT</b> - 4 years</p>
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="resume-right-content">
+
+    <div class="resume-section">
+      <h3 class="section-title-right">SUMMARY</h3>
+      <p class="summary-text">
+        {% if user.workprofile.summary %}
+          {{ user.workprofile.summary }}
+        {% else %}
+          {% lorem 50 w %}
+        {% endif %}
+      </p>
+    </div>
+
+    <div class="resume-section">
+      <h3 class="section-title-right">EXPERIENCE</h3>
+      {% for job in user.workprofile.works.all %}
+        <div class="experience-item">
+          <h4><b>{{ job.position }}</b></h4>
+          <p class="text-muted-pdf">{{ job.company }} | {{ job.started_at|date:"M Y" }}
+            - {{ job.ended_at|date:"Y"|default:"Now" }}</p>
+          <p>{{ job.description }}</p>
+        </div>
+      {% empty %}
+        <div class="experience-item">
+          <h4><b>Senior Backend Developer</b></h4>
+          <p class="text-muted-pdf">Google | 2024 - Now</p>
+          <p>{% lorem 30 w %}</p>
+        </div>
+        <div class="experience-item">
+          <h4><b>Middle Backend Developer</b></h4>
+          <p class="text-muted-pdf">Ubisoft | 2022 - 2024</p>
+          <p>{% lorem 30 w %}</p>
+        </div>
+        <div class="experience-item">
+          <h4><b>Junior Backend Developer</b></h4>
+          <p class="text-muted-pdf">EPAM | 2020 - 2022</p>
+          <p>{% lorem 30 w %}</p>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="resume-section">
+      <h3 class="section-title-right">EDUCATION</h3>
+      {% for edu in user.workprofile.educations.all %}
+        <div class="experience-item">
+          <h4>{{ edu.institution }} | {{ edu.started_at|date:"Y" }}
+            - {{ edu.ended_at|date:"Y"|default:"Now" }}</h4>
+          <p class="text-muted-pdf">{{ edu.specialty }}</p>
+        </div>
+      {% empty %}
+        <div class="experience-item">
+          <h4>Kyiv National University | 2025 - Now</h4>
+          <p class="text-muted-pdf">126 Information Systems and Technologies</p>
+        </div>
+        <div class="experience-item">
+          <h4>Kyiv National University | 2021 - 2025</h4>
+          <p class="text-muted-pdf">126 Information Systems and Technologies</p>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>

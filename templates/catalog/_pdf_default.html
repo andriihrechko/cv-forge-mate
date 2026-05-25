@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static template.css_path %}">
+    <style>
+        @page {
+            size: A4;
+        }
+        body {
+            background-color: #ffffff;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    {% include template.html_path %}
+</body>
+</html>

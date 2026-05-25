@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static template.css_path %}">
+{% endblock %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="bg-white px-5 py-4 rounded shadow-sm">
+      <div class="row align-items-center justify-content-between">
+
+        <div class="col-12 text-center mb-3">
+          <h2 class="h3 fw-semibold mb-3">Your resume</h2>
+          <p class="text-muted">This template is designed for a single A4 page. If your content exceeds this limit, the
+            PDF may not generate correctly. Please review your information: trim overly long descriptions or add more
+            details if your resume appears sparse. Remember, conciseness is key to making a great impression on
+            recruiters.</p>
+        </div>
+        <div class="text-center mb-4">
+          <a href="{% url 'catalog:download-pdf' template.slug %}"
+             class="btn btn-light-blue" style="width: 400px">
+            Download PDF
+          </a>
+        </div>
+        <div class="col-12 mb-3 d-flex justify-content-center ">
+          {% include template.html_path %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

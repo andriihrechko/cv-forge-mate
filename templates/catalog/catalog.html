@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Catalog{% endblock %}
+
+{% block content %}
+  <div class="container py-4">
+    <div class="bg-white px-5 pt-4 pb-3 rounded shadow-sm">
+      <h1 class="text-center h3 mb-3">Catalog templates</h1>
+
+      <div class="d-flex justify-content-center mb-4">
+        <div class="search-box w-100" style="max-width: 500px;">
+          <div class="input-group shadow-sm border rounded-3 position-relative d-flex align-items-center bg-white">
+
+          <span class="input-group-text bg-transparent border-0 pe-2 text-muted"><i
+              class="fa-solid fa-magnifying-glass"></i></span>
+
+            <input type="text"
+                   name="query"
+                   class="form-control border-0 bg-transparent py-2 shadow-none"
+                   placeholder="Search ..."
+                   hx-get="{% url 'catalog:catalog' %}"
+                   hx-trigger="input changed delay:300ms"
+                   hx-target="#catalog-results"
+                   hx-indicator="#search-spinner">
+          </div>
+        </div>
+      </div>
+      <div id="catalog-results"
+           hx-get="{% url 'catalog:catalog' %}"
+           hx-trigger="load">
+        <div class="text-center text-muted">
+          <p>Loading catalog...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
