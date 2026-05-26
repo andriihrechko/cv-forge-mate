@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('work_profile', '0003_alter_educationexperience_options_and_more'),
+        ("work_profile", "0003_alter_educationexperience_options_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='workprofile',
-            name='summary',
+            model_name="workprofile",
+            name="summary",
             field=models.TextField(blank=True, null=True),
         ),
     ]

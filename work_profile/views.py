@@ -6,7 +6,7 @@ from django.views.generic import (
     DetailView,
     CreateView,
     UpdateView,
-    DeleteView
+    DeleteView,
 )
 
 from work_profile.forms import (
@@ -16,7 +16,7 @@ from work_profile.forms import (
     SkillForm,
     LanguageForm,
     WorkExperienceForm,
-    EducationExperienceForm
+    EducationExperienceForm,
 )
 from work_profile.models import (
     WorkProfile,
@@ -24,7 +24,7 @@ from work_profile.models import (
     Skill,
     Language,
     WorkExperience,
-    EducationExperience
+    EducationExperience,
 )
 
 
@@ -32,8 +32,11 @@ class ProfileOwnerMixin:
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         if not self.object:
-            kwargs["instance"] = self.model(profile=self.request.user.workprofile)
+            kwargs["instance"] = self.model(
+                profile=self.request.user.workprofile
+            )
         return kwargs
+
 
 class ProfileView(LoginRequiredMixin, DetailView):
     model = WorkProfile
@@ -41,7 +44,9 @@ class ProfileView(LoginRequiredMixin, DetailView):
     context_object_name = "profile"
 
     def get_object(self, queryset=None):
-        profile, created = WorkProfile.objects.get_or_create(user=self.request.user)
+        profile, created = WorkProfile.objects.get_or_create(
+            user=self.request.user
+        )
         if not created:
             profile = WorkProfile.objects.prefetch_related(
                 "socials", "skills", "languages", "educations", "works"
@@ -61,7 +66,9 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
 
     def post(self, request, *args, **kwargs):
         user_form = UserDataForm(request.POST, instance=self.request.user)
-        profile_form = WorkProfileForm(request.POST, instance=self.request.user.workprofile)
+        profile_form = WorkProfileForm(
+            request.POST, instance=self.request.user.workprofile
+        )
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
@@ -69,6 +76,7 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
         return self.render_to_response(
             context={"user_form": user_form, "profile_form": profile_form}
         )
+
 
 class SocialCreateView(LoginRequiredMixin, ProfileOwnerMixin, CreateView):
     model = Social

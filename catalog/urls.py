@@ -14,8 +14,16 @@ urlpatterns = [
     path("", HomeView.as_view(), name="home"),
     path("about/", AboutView.as_view(), name="about"),
     path("catalog/", CatalogView.as_view(), name="catalog"),
-    path("catalog/template/<slug:slug>/", TemplateDetailView.as_view(), name="template-detail"),
-    path("catalog/template/<slug:slug>/dowload/", download_pdf, name="download-pdf")
+    path(
+        "catalog/template/<slug:slug>/",
+        TemplateDetailView.as_view(),
+        name="template-detail",
+    ),
+    path(
+        "catalog/template/<slug:slug>/dowload/",
+        download_pdf,
+        name="download-pdf"
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 app_name = "catalog"

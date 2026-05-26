@@ -1,6 +1,7 @@
 from catalog.models import ResumeTemplate
 from django.test import TestCase
 
+
 class TestResumeTemplate(TestCase):
     def setUp(self):
         self.template = ResumeTemplate.objects.create(
@@ -11,7 +12,7 @@ class TestResumeTemplate(TestCase):
         self.assertEqual(str(self.template), "Modern Developer CV")
 
     def test_slug_generation(self):
-        self.assertEqual(self.template.slug,"modern-developer-cv")
+        self.assertEqual(self.template.slug, "modern-developer-cv")
 
     def test_path_generation(self):
         expected_html = "resumes/modern-developer-cv.html"

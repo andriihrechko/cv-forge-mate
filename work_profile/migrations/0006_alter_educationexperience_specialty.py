@@ -4,15 +4,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('work_profile', '0005_alter_educationexperience_specialty_and_more'),
+        ("work_profile", "0005_alter_educationexperience_specialty_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='educationexperience',
-            name='specialty',
-            field=models.CharField(choices=[('ASSOC', 'Associate'), ('BACH', 'Bachelor'), ('MAST', 'Master'), ('DOC', 'Doctorate'), ('PROF', 'Professional')], default='BACH', max_length=5),
+            model_name="educationexperience",
+            name="specialty",
+            field=models.CharField(
+                choices=[
+                    ("ASSOC", "Associate"),
+                    ("BACH", "Bachelor"),
+                    ("MAST", "Master"),
+                    ("DOC", "Doctorate"),
+                    ("PROF", "Professional"),
+                ],
+                default="BACH",
+                max_length=5,
+            ),
         ),
     ]

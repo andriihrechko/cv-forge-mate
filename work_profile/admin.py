@@ -12,7 +12,13 @@ from work_profile.models import (
 
 @admin.register(WorkProfile)
 class WorkProfileAdmin(admin.ModelAdmin):
-    list_display = ("user", "desired_position", "phone_number", "location", "summary")
+    list_display = (
+        "user",
+        "desired_position",
+        "phone_number",
+        "location",
+        "summary"
+    )
 
 
 @admin.register(Social)
@@ -50,4 +56,4 @@ class WorkExperienceAdmin(admin.ModelAdmin):
         "started_at",
         "ended_at",
         "description",
-    )  
+    )

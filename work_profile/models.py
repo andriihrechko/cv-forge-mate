@@ -11,10 +11,7 @@ from work_profile.choices import (
 
 
 class WorkProfile(models.Model):
-    user = models.OneToOneField(
-        get_user_model(),
-        on_delete=models.CASCADE
-    )
+    user = models.OneToOneField(get_user_model(), on_delete=models.CASCADE)
     desired_position = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     location = models.CharField(max_length=255, blank=True, null=True)
@@ -26,9 +23,7 @@ class WorkProfile(models.Model):
 
 class Social(models.Model):
     profile = models.ForeignKey(
-        WorkProfile,
-        on_delete=models.CASCADE,
-        related_name="socials"
+        WorkProfile, on_delete=models.CASCADE, related_name="socials"
     )
     type = models.CharField(
         max_length=2,
@@ -40,7 +35,8 @@ class Social(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["profile", "type"], name="unique_social_type_for_user"
+                fields=["profile", "type"],
+                name="unique_social_type_for_user"
             )
         ]
 
@@ -50,19 +46,12 @@ class Social(models.Model):
 
 class Skill(models.Model):
     profile = models.ForeignKey(
-        WorkProfile,
-        on_delete=models.CASCADE,
-        related_name="skills"
+        WorkProfile, on_delete=models.CASCADE, related_name="skills"
     )
     type = models.CharField(
-        max_length=20,
-        choices=SkillChoice.choices,
-        default=SkillChoice.PYTHON
+        max_length=20, choices=SkillChoice.choices, default=SkillChoice.PYTHON
     )
-    experience = models.IntegerField(
-        blank=True,
-        null=True
-    )
+    experience = models.IntegerField(blank=True, null=True)
 
     class Meta:
         constraints = [
@@ -77,9 +66,7 @@ class Skill(models.Model):
 
 class Language(models.Model):
     profile = models.ForeignKey(
-        WorkProfile,
-        on_delete=models.CASCADE,
-        related_name="languages"
+        WorkProfile, on_delete=models.CASCADE, related_name="languages"
     )
     language = models.CharField(
         max_length=20,
@@ -89,7 +76,7 @@ class Language(models.Model):
     level = models.CharField(
         max_length=255,
         choices=LanguageLevelChoices.choices,
-        default=LanguageLevelChoices.C2
+        default=LanguageLevelChoices.C2,
     )
 
     class Meta:
@@ -105,13 +92,9 @@ class Language(models.Model):
 
 class EducationExperience(models.Model):
     profile = models.ForeignKey(
-        WorkProfile,
-        on_delete=models.CASCADE,
-        related_name="educations"
+        WorkProfile, on_delete=models.CASCADE, related_name="educations"
     )
-    institution = models.CharField(
-        max_length=255
-    )
+    institution = models.CharField(max_length=255)
     started_at = models.DateField()
     ended_at = models.DateField(blank=True, null=True)
     degree = models.CharField(
@@ -119,9 +102,7 @@ class EducationExperience(models.Model):
         choices=DegreeChoices.choices,
         default=DegreeChoices.BACHELOR
     )
-    specialty = models.CharField(
-        max_length=63
-    )
+    specialty = models.CharField(max_length=63)
 
     class Meta:
         ordering = ("-started_at",)
@@ -132,16 +113,12 @@ class EducationExperience(models.Model):
 
 class WorkExperience(models.Model):
     profile = models.ForeignKey(
-        WorkProfile,
-        on_delete=models.CASCADE,
-        related_name="works"
+        WorkProfile, on_delete=models.CASCADE, related_name="works"
     )
     company = models.CharField(
         max_length=255,
     )
-    position = models.CharField(
-        max_length=255
-    )
+    position = models.CharField(max_length=255)
     started_at = models.DateField()
     ended_at = models.DateField(blank=True, null=True)
     description = models.TextField()
@@ -151,7 +128,3 @@ class WorkExperience(models.Model):
 
     def __str__(self):
         return f"{self.profile.user.username} - {self.position}"
-
-
-
-

@@ -4,15 +4,14 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('catalog', '0001_initial'),
+        ("catalog", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='resumetemplate',
-            name='description',
-            field=models.TextField(blank=True, default='No description.'),
+            model_name="resumetemplate",
+            name="description",
+            field=models.TextField(blank=True, default="No description."),
         ),
     ]

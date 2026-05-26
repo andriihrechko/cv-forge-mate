@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 from catalog.models import ResumeTemplate
 
+
 class CatalogViewsTest(TestCase):
     def setUp(self):
         self.template = ResumeTemplate.objects.create(title="Template")
@@ -30,7 +31,8 @@ class CatalogViewsTest(TestCase):
         response = self.client.get(
             reverse(
                 "catalog:template-detail",
-                kwargs={"slug": self.template.slug})
+                kwargs={"slug": self.template.slug}
+            )
         )
         self.assertEqual(response.status_code, 302)
 
@@ -38,6 +40,7 @@ class CatalogViewsTest(TestCase):
         response = self.client.get(
             reverse(
                 "catalog:download-pdf",
-                kwargs={"slug": self.template.slug})
+                kwargs={"slug": self.template.slug}
+            )
         )
         self.assertEqual(response.status_code, 302)

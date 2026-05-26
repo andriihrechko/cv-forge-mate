@@ -4,18 +4,17 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('work_profile', '0002_alter_workprofile_desired_position_and_more'),
+        ("work_profile", "0002_alter_workprofile_desired_position_and_more"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='educationexperience',
-            options={'ordering': ('-started_at',)},
+            name="educationexperience",
+            options={"ordering": ("-started_at",)},
         ),
         migrations.AlterModelOptions(
-            name='workexperience',
-            options={'ordering': ('-started_at',)},
+            name="workexperience",
+            options={"ordering": ("-started_at",)},
         ),
     ]

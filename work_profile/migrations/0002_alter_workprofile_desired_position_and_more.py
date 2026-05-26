@@ -4,30 +4,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('work_profile', '0001_initial'),
+        ("work_profile", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='workprofile',
-            name='desired_position',
+            model_name="workprofile",
+            name="desired_position",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='workprofile',
-            name='location',
+            model_name="workprofile",
+            name="location",
             field=models.CharField(blank=True, max_length=255, null=True),
         ),
         migrations.AlterField(
-            model_name='workprofile',
-            name='phone_number',
+            model_name="workprofile",
+            name="phone_number",
             field=models.CharField(blank=True, max_length=20, null=True),
         ),
         migrations.AlterField(
-            model_name='workprofile',
-            name='summary',
+            model_name="workprofile",
+            name="summary",
             field=models.CharField(blank=True, max_length=1000, null=True),
         ),
     ]

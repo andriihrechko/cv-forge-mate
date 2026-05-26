@@ -1,22 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.shortcuts import reverse
-from work_profile.models import (
-    WorkProfile,
-    Social,
-    Skill,
-    Language,
-    EducationExperience,
-    WorkExperience,
-)
-from django.db.utils import IntegrityError
-from work_profile.choices import (
-    NetworkChoice,
-    SkillChoice,
-    LanguageChoice,
-    LanguageLevelChoices,
-    DegreeChoices,
-)
+from work_profile.models import WorkProfile
 
 
 class TestProfileViews(TestCase):
@@ -46,7 +31,7 @@ class TestProfileViews(TestCase):
     def test_profile_update_get_authenticated(self):
         self.client.force_login(self.user)
 
-        profile = WorkProfile.objects.create(user=self.user)
+        WorkProfile.objects.create(user=self.user)
         response = self.client.get(reverse("profile:profile"))
 
         self.assertEqual(response.status_code, 200)

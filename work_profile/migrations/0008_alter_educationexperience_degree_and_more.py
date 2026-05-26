@@ -4,30 +4,39 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('work_profile', '0007_alter_educationexperience_ended_at_and_more'),
+        ("work_profile", "0007_alter_educationexperience_ended_at_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='educationexperience',
-            name='degree',
-            field=models.CharField(choices=[('ASSOC', 'Associate'), ('BACH', 'Bachelor'), ('MAST', 'Master'), ('DOC', 'Doctorate'), ('PROF', 'Professional')], default='BACH', max_length=5),
+            model_name="educationexperience",
+            name="degree",
+            field=models.CharField(
+                choices=[
+                    ("ASSOC", "Associate"),
+                    ("BACH", "Bachelor"),
+                    ("MAST", "Master"),
+                    ("DOC", "Doctorate"),
+                    ("PROF", "Professional"),
+                ],
+                default="BACH",
+                max_length=5,
+            ),
         ),
         migrations.AlterField(
-            model_name='educationexperience',
-            name='ended_at',
+            model_name="educationexperience",
+            name="ended_at",
             field=models.DateField(blank=True, null=True),
         ),
         migrations.AlterField(
-            model_name='educationexperience',
-            name='specialty',
+            model_name="educationexperience",
+            name="specialty",
             field=models.CharField(max_length=63),
         ),
         migrations.AlterField(
-            model_name='workexperience',
-            name='ended_at',
+            model_name="workexperience",
+            name="ended_at",
             field=models.DateField(blank=True, null=True),
         ),
     ]
