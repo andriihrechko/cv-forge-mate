@@ -17,5 +17,3 @@ class ResumeTemplate(models.Model):
         self.html_path = f"resumes/{self.slug}.html"
         self.css_path = f"resumes/{self.slug}.css"
         super().save(*args, **kwargs)
-
-
