@@ -11,10 +11,12 @@
 {% for field in form %}
   {% if field.field.widget.input_type == "checkbox" %}
     <div class="form-check mb-3">
-      {{ field }}
+      {% render_field field class="form-check-input" %}
+
       <label class="form-check-label" for="{{ field.id_for_label }}">
         {{ field.label }}
       </label>
+
       {% if field.errors %}
         <div class="text-danger small">{{ field.errors|striptags }}</div>
       {% endif %}
@@ -38,6 +40,6 @@
         {% render_field field class="form-control" %}
       {% endif %}
 
-      </div>
+    </div>
   {% endif %}
 {% endfor %}

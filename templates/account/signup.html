@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load allauth account %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+  <div class="container d-flex justify-content-center py-4">
+    <div class="card p-4 shadow-sm border-0 w-100" style="max-width: 700px;">
+
+      <h2 class="fw-semibold mb-4">Sign Up</h2>
+
+      <p class="text-muted small">
+        Already have an account? Then please <a href="{{ login_url }}">sign in</a>.
+      </p>
+
+      {% if not SOCIALACCOUNT_ONLY %}
+        <form method="post" action="{% url "account_signup" %}" novalidate>
+          {% csrf_token %}
+          {% include "includes/form.html" %}
+          <div class="d-grid my-4">
+            <button type="submit" class="btn btn-light-blue">Sign Up</button>
+          </div>
+          {{ redirect_field }}
+        </form>
+      {% endif %}
+
+      {% if SOCIALACCOUNT_ENABLED %}
+        <div class="d-flex align-items-center text-muted small my-3">
+          <hr class="w-100 my-0">
+          <span class="px-3">OR</span>
+          <hr class="w-100 my-0">
+        </div>
+        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+      {% endif %}
+    </div>
+  </div>
+{% endblock content %}

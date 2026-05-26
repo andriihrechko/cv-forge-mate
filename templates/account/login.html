@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load allauth account %}
+
+{% block title %}{% trans "Sign In" %}{% endblock title %}
+
+{% block content %}
+  <div class="container d-flex justify-content-center py-4">
+    <div class="card p-4 shadow-sm border-0 w-100" style="max-width: 700px;">
+
+      <h2 class="fw-bold mb-4">{% trans "Sign In" %}</h2>
+
+      {% if not SOCIALACCOUNT_ONLY %}
+        <form method="post" action="{% url 'account_login' %}" novalidate>
+          {% csrf_token %}
+          {% include "includes/form.html" with form=form %}
+          <div class="d-grid my-4">
+            <button type="submit" class="btn btn-light-blue">{% trans "Sign In" %}</button>
+          </div>
+          {{ redirect_field }}
+        </form>
+      {% endif %}
+
+      {% if SOCIALACCOUNT_ENABLED %}
+        <div class="d-flex align-items-center text-muted small mb-3">
+          <hr class="w-100 my-0">
+          <span class="px-3">OR</span>
+          <hr class="w-100 my-0">
+        </div>
+        {% load socialaccount %}
+
+        <div class="d-grid gap-2">
+          <a href="{% provider_login_url 'google' process='login' next='/profile/' %}"
+             class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2">
+            <i class="fa-brands fa-google"></i>
+            Continue with Google
+          </a>
+        </div>
+      {% endif %}
+
+      <div class="text-center text-muted small px-2 mt-3">
+        If you have not created an account yet, then please <a href="{{ signup_url }}">sign up</a> first.
+      </div>
+
+    </div>
+  </div>
+{% endblock content %}
