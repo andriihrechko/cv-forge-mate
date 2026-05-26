@@ -28,6 +28,13 @@ from work_profile.models import (
 )
 
 
+class ProfileOwnerMixin:
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if not self.object:
+            kwargs["instance"] = self.model(profile=self.request.user.workprofile)
+        return kwargs
+
 class ProfileView(LoginRequiredMixin, DetailView):
     model = WorkProfile
     template_name = "profile/profile.html"
@@ -35,12 +42,10 @@ class ProfileView(LoginRequiredMixin, DetailView):
 
     def get_object(self, queryset=None):
         profile, created = WorkProfile.objects.get_or_create(user=self.request.user)
-
         if not created:
             profile = WorkProfile.objects.prefetch_related(
                 "socials", "skills", "languages", "educations", "works"
             ).get(pk=profile.pk)
-
         return profile
 
 
@@ -65,17 +70,11 @@ class ProfileUpdateView(LoginRequiredMixin, TemplateView):
             context={"user_form": user_form, "profile_form": profile_form}
         )
 
-class SocialCreateView(LoginRequiredMixin, CreateView):
+class SocialCreateView(LoginRequiredMixin, ProfileOwnerMixin, CreateView):
     model = Social
     form_class = SocialForm
     template_name = "profile/social_form.html"
     success_url = reverse_lazy("profile:profile")
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if not self.object:
-            kwargs["instance"] = Social(profile=self.request.user.workprofile)
-        return kwargs
 
 
 class SocialEditView(LoginRequiredMixin, UpdateView):
@@ -90,17 +89,11 @@ class SocialDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("profile:profile")
 
 
-class SkillCreateView(LoginRequiredMixin, CreateView):
+class SkillCreateView(LoginRequiredMixin, ProfileOwnerMixin, CreateView):
     model = Skill
     form_class = SkillForm
     template_name = "profile/skill_form.html"
     success_url = reverse_lazy("profile:profile")
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if not self.object:
-            kwargs["instance"] = Skill(profile=self.request.user.workprofile)
-        return kwargs
 
 
 class SkillEditView(LoginRequiredMixin, UpdateView):
@@ -115,17 +108,11 @@ class SkillDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("profile:profile")
 
 
-class LanguageCreateView(LoginRequiredMixin, CreateView):
+class LanguageCreateView(LoginRequiredMixin, ProfileOwnerMixin, CreateView):
     model = Language
     form_class = LanguageForm
     template_name = "profile/language_form.html"
     success_url = reverse_lazy("profile:profile")
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if not self.object:
-            kwargs["instance"] = Language(profile=self.request.user.workprofile)
-        return kwargs
 
 
 class LanguageEditView(LoginRequiredMixin, UpdateView):
@@ -140,18 +127,12 @@ class LanguageDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("profile:profile")
 
 
-class WorkCreateView(LoginRequiredMixin, CreateView):
+class WorkCreateView(LoginRequiredMixin, ProfileOwnerMixin, CreateView):
     model = WorkExperience
     form_class = WorkExperienceForm
     template_name = "profile/work_experience_form.html"
     success_url = reverse_lazy("profile:profile")
     context_object_name = "work_experience"
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if not self.object:
-            kwargs["instance"] = WorkExperience(profile=self.request.user.workprofile)
-        return kwargs
 
 
 class WorkEditView(LoginRequiredMixin, UpdateView):
@@ -167,18 +148,12 @@ class WorkDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy("profile:profile")
 
 
-class EducationCreateView(LoginRequiredMixin, CreateView):
+class EducationCreateView(LoginRequiredMixin, ProfileOwnerMixin, CreateView):
     model = EducationExperience
     form_class = EducationExperienceForm
     template_name = "profile/education_experience_form.html"
     success_url = reverse_lazy("profile:profile")
     context_object_name = "education_experience"
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if not self.object:
-            kwargs["instance"] = EducationExperience(profile=self.request.user.workprofile)
-        return kwargs
 
 
 class EducationEditView(LoginRequiredMixin, UpdateView):
