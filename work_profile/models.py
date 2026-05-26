@@ -127,7 +127,7 @@ class EducationExperience(models.Model):
         ordering = ("-started_at",)
 
     def __str__(self):
-        return f"{self.profile.user.username} - {self.degree}"
+        return f"{self.profile.user.username} - {self.get_degree_display()}"
 
 
 class WorkExperience(models.Model):
