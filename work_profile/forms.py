@@ -8,8 +8,25 @@ from work_profile.models import (
     Skill,
     Language,
     WorkExperience,
-    EducationExperience
+    EducationExperience,
 )
+
+
+class DateValidationMixin:
+    def clean(self):
+        cleaned_data = super().clean()
+        started_at = cleaned_data.get("started_at")
+        ended_at = cleaned_data.get("ended_at")
+        today = timezone.now().date()
+        if started_at and started_at > today:
+            self.add_error("started_at", "Start date cannot be in the future.")
+        if ended_at and ended_at > today:
+            self.add_error("ended_at", "End date cannot be in the future.")
+        if started_at and ended_at and ended_at < started_at:
+            self.add_error(
+                "ended_at", "End date cannot be earlier than the start date."
+            )
+        return cleaned_data
 
 
 class UserDataForm(forms.ModelForm):
@@ -81,7 +98,7 @@ class LanguageForm(forms.ModelForm):
         return cleaned_data
 
 
-class WorkExperienceForm(forms.ModelForm):
+class WorkExperienceForm(DateValidationMixin, forms.ModelForm):
     started_at = forms.DateField(
         initial=timezone.now,
         widget=forms.DateInput(
@@ -105,7 +122,7 @@ class WorkExperienceForm(forms.ModelForm):
         }
 
 
-class EducationExperienceForm(forms.ModelForm):
+class EducationExperienceForm(DateValidationMixin, forms.ModelForm):
     started_at = forms.DateField(
         initial=timezone.now,
         widget=forms.DateInput(
