@@ -7,6 +7,9 @@ class TestResumeTemplate(TestCase):
             title="Modern Developer CV"
         )
 
+    def test_string_method(self):
+        self.assertEqual(str(self.template), "Modern Developer CV")
+
     def test_slug_generation(self):
         self.assertEqual(self.template.slug,"modern-developer-cv")
 
