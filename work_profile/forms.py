@@ -1,7 +1,7 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from users.models import User
 from work_profile.models import (
     WorkProfile,
     Social,
@@ -15,7 +15,7 @@ from work_profile.utils.mixins import DateValidationMixin
 
 class UserDataForm(forms.ModelForm):
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ("email", "first_name", "last_name")
 
 

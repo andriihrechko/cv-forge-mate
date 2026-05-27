@@ -1,16 +1,26 @@
 import os
 from pathlib import Path
 
+import environ
+import cloudinary
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = "django-insecure-((=30!+m*vu(ghjmy(%rprl=oxkn(nk4vjq0d)ace(_e&l%b(q"
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
-AUTH_USER_MODEL = "users.User"
+cloudinary.config(
+    cloud_name=env("CLOUDINARY_CLOUD_NAME"),
+    api_key=env("CLOUDINARY_API_KEY"),
+    api_secret=env("CLOUDINARY_API_SECRET"),
+)
 
-DEBUG = True
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
-ALLOWED_HOSTS = []
+DEBUG = env.bool("DEBUG", default=False)
+
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -24,14 +34,15 @@ INSTALLED_APPS = [
     "allauth.account",
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
+    "cloudinary",
     "widget_tweaks",
-    "users",
     "catalog",
     "work_profile",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -72,6 +83,7 @@ SOCIALACCOUNT_PROVIDERS = {
         "OAUTH_PKCE_ENABLED": True,
     }
 }
+
 SOCIALACCOUNT_LOGIN_ON_GET = True
 
 ROOT_URLCONF = "config.urls"
@@ -131,6 +143,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+STATIC_ROOT = BASE_DIR / "staticfiles/"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 MEDIA_URL = "/media/"
@@ -157,5 +171,15 @@ LOGGING = {
             "level": "DEBUG",
             "propagate": False,
         },
+    },
+}
+
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }

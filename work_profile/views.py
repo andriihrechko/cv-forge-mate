@@ -26,16 +26,7 @@ from work_profile.models import (
     WorkExperience,
     EducationExperience,
 )
-
-
-class ProfileOwnerMixin:
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        if not self.object:
-            kwargs["instance"] = self.model(
-                profile=self.request.user.workprofile
-            )
-        return kwargs
+from work_profile.utils.mixins import ProfileOwnerMixin
 
 
 class ProfileView(LoginRequiredMixin, DetailView):

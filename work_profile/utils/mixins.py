@@ -16,3 +16,13 @@ class DateValidationMixin:
                 "ended_at", "End date cannot be earlier than the start date."
             )
         return cleaned_data
+
+
+class ProfileOwnerMixin:
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if not self.object:
+            kwargs["instance"] = self.model(
+                profile=self.request.user.workprofile
+            )
+        return kwargs
