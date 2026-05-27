@@ -10,7 +10,6 @@ class ResumeTemplate(models.Model):
     )
     html_path = models.CharField(max_length=255, blank=True, null=True)
     css_path = models.CharField(max_length=255, blank=True, null=True)
-    description = models.TextField(blank=True, default="No description.")
     is_active = models.BooleanField(default=True)
 
     def save(self, *args, **kwargs):

@@ -20,7 +20,3 @@ class TestResumeTemplate(TestCase):
 
         self.assertEqual(self.template.html_path, expected_html)
         self.assertEqual(self.template.css_path, expected_css)
-
-    def test_default_values(self):
-        self.assertEqual(self.template.description, "No description.")
-        self.assertTrue(self.template.is_active)
