@@ -1,13 +1,12 @@
 from django.db import models
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 
 class ResumeTemplate(models.Model):
     title = models.CharField(max_length=255)
     slug = models.SlugField(blank=True, null=True)
-    preview_image = models.ImageField(
-        upload_to="templates_preview/", blank=True, null=True
-    )
+    preview_image = CloudinaryField(blank=True, null=True)
     html_path = models.CharField(max_length=255, blank=True, null=True)
     css_path = models.CharField(max_length=255, blank=True, null=True)
     is_active = models.BooleanField(default=True)
