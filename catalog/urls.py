@@ -7,7 +7,7 @@ from catalog.views import (
     AboutView,
     CatalogView,
     TemplateDetailView,
-    download_pdf,
+    DownloadPDFView,
 )
 
 urlpatterns = [
@@ -21,7 +21,7 @@ urlpatterns = [
     ),
     path(
         "catalog/template/<slug:slug>/dowload/",
-        download_pdf,
+        DownloadPDFView.as_view(),
         name="download-pdf"
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

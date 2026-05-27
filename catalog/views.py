@@ -1,8 +1,8 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.views.generic import TemplateView, ListView, DetailView
+from django.views import View
 from django.shortcuts import get_object_or_404
 from weasyprint import HTML
 
@@ -39,19 +39,22 @@ class TemplateDetailView(LoginRequiredMixin, DetailView):
     template_name = "catalog/template_detail.html"
 
 
-@login_required
-def download_pdf(request, slug):
-    template = get_object_or_404(ResumeTemplate, slug=slug)
-    context = {"template": template}
-    html_string = render_to_string(
-        "catalog/_pdf_default.html", context, request=request
-    )
-    html = HTML(string=html_string, base_url=request.build_absolute_uri("/"))
-    pdf = html.write_pdf()
+class DownloadPDFView(LoginRequiredMixin, View):
+    def get(self, request, slug):
+        template = get_object_or_404(ResumeTemplate, slug=slug)
+        context = {"template": template}
 
-    username = request.user.get_full_name() or "User"
-    filename = f"CV.{username}.pdf"
+        html_string = render_to_string(
+            "catalog/_pdf_default.html", context, request=request
+        )
+        html = HTML(
+            string=html_string,
+            base_url=request.build_absolute_uri("/")
+        )
+        pdf = html.write_pdf()
 
-    response = HttpResponse(pdf, content_type="application/pdf")
-    response["Content-Disposition"] = f'attachment; filename="{filename}"'
-    return response
+        username = request.user.get_full_name() or "User"
+        response = HttpResponse(pdf, content_type="application/pdf")
+        response["Content-Disposition"] = (f'attachment; '
+                                           f'filename="CV.{username}.pdf"')
+        return response
