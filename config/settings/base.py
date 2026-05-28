@@ -54,22 +54,27 @@ AUTHENTICATION_BACKENDS = [
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-
 SITE_ID = 1
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_LOGIN_METHODS = {'email'}
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_EMAIL_VERIFICATION = "none"
 
 ACCOUNT_SIGNUP_FIELDS = {
-    'email': {'required': True, 'unique': True},
+    "email*": {"required": True},
+    "password1": {"required": True},
+    "password2": {"required": True},
 }
 
-LOGIN_REDIRECT_URL = "profile:profile"
+
+ACCOUNT_AUTHENTICATION_METHOD = "email"
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_SESSION_REMEMBER = None
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+
+
+LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+ACCOUNT_LOGIN_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_REDIRECT_URL = "/"
 ACCOUNT_LOGOUT_ON_GET = False
-
 
 SOCIALACCOUNT_PROVIDERS = {
     "google": {
