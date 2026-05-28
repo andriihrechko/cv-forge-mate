@@ -25,13 +25,22 @@
       {% endif %}
 
       {% if SOCIALACCOUNT_ENABLED %}
-        <div class="d-flex align-items-center text-muted small my-3">
+        <div class="d-flex align-items-center text-muted small mb-3">
           <hr class="w-100 my-0">
           <span class="px-3">OR</span>
           <hr class="w-100 my-0">
         </div>
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
+        {% load socialaccount %}
+
+        <div class="d-grid gap-2">
+          <a href="{% provider_login_url 'google' process='login' next='/profile/' %}"
+             class="btn btn-outline-dark d-flex align-items-center justify-content-center gap-2">
+            <i class="fa-brands fa-google"></i>
+            Continue with Google
+          </a>
+        </div>
       {% endif %}
+
     </div>
   </div>
 {% endblock content %}

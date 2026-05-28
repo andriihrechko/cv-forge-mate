@@ -1,99 +1,89 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
-  <section class="hero-section">
-    <div class="container py-5">
-      <div class="row align-items-center g-5">
-        <div class="col-lg-6 text-center text-lg-start">
-          <h1 class="display-4 text-dark mb-3">
-            Create a professional CV in 10 minutes that will catch the attention of a recruiter
-          </h1>
-          <p class="lead text-secondary mb-4">
-            Choose a modern ATS-friendly template, fill in your details with smart suggestions, and upload your perfect
-            resume in PDF.
-          </p>
-          <div class="d-grid d-sm-flex justify-content-sm-center justify-content-lg-start gap-3">
-            <a href="{% url "catalog:catalog" %}" class="btn btn-light-blue btn-lg px-4 shadow-sm">
-              Create a resume for free
-            </a>
+  <div class="container py-4">
+    <div class="row justify-content-center">
+      <div class="bg-white px-5 pt-4 pb-3 rounded shadow-sm" style="max-width: 1200px">
+        <section class="py-5 border-bottom">
+          <div class="text-center">
+            <h1 class="text-dark mb-3">
+              Create a <span class="text-primary fw-semibold">professional CV</span> in 10 minutes that will
+              catch the attention of a recruiter
+            </h1>
+            <p class="text-secondary" style="margin-bottom: 100px; margin-top: 50px">
+              Choose from a variety of modern ATS-friendly templates designed to align with current industry standards.
+              Our platform streamlines the formatting process, allowing you to organize your professional experience,
+              skills, and achievements in a cohesive structure. Whether you are at the beginning of your career path
+              or looking to refine your existing documentation, our tools help you manage your information effectively
+              and export your resume in a standard PDF format.
+            </p>
+
+            <div class="d-grid d-sm-flex justify-content-center gap-3" style="margin-bottom: 50px;">
+              <a href="{% url "catalog:catalog" %}" class="btn btn-light-blue btn-lg px-4 shadow-sm">
+                Create a resume for free
+              </a>
+            </div>
           </div>
-        </div>
+        </section>
 
-        <div class="col-lg-6">
-          <div class="card shadow-lg p-4 border-0 mx-auto position-relative overflow-hidden"
-               style="max-width: 450px;">
-            <div class="row align-items-center border-bottom pb-3 mb-3">
-              <div class="col-8">
-                <h3 class="h5 fw-bold text-dark mb-1">Oleksandr Kovalenko</h3>
-                <p class="text-primary fw-semibold mb-2" style="font-size: 0.9rem;">Middle UI/UX Designer</p>
-                <div class="text-muted d-flex flex-wrap gap-2" style="font-size: 0.75rem;">
-                  <span><i class="bi bi-geo-alt-fill me-1"></i>Kyiv, Ukraine</span>
-                  <span><i class="bi bi-envelope-fill me-1"></i>alex.design@email.com</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="mb-3">
-              <h4 class="fw-bold text-dark text-uppercase mb-2" style="font-size: 0.8rem; letter-spacing: 0.5px;">
-                Work experience
-              </h4>
-              <div class="mb-2">
-                <div class="d-flex justify-content-between align-items-baseline">
-                  <h5 class="fw-bold text-secondary mb-0" style="font-size: 0.85rem;">UI/UX Designer</h5>
-                  <span class="text-muted" style="font-size: 0.75rem;">2024 - Present</span>
-                </div>
-                <p class="text-muted mb-1" style="font-size: 0.8rem;">GlobalTech Solutions</p>
-                <p class="text-secondary mb-0" style="font-size: 0.8rem; line-height: 1.4;">
-                  Designed interfaces for CRM systems. Increased conversion of target actions by <span class="fw-semibold text-dark">18%</span> thanks to redesign of user onboarding.
-                </p>
-              </div>
-            </div>
-
-            <div>
-              <h4 class="fw-bold text-dark text-uppercase mb-2" style="font-size: 0.8rem; letter-spacing: 0.5px;">
-                Skills
-              </h4>
-              <div class="d-flex flex-wrap gap-1">
-                <span class="badge bg-light text-dark border py-1.5 px-2.5 fw-medium">Figma</span>
-                <span class="badge bg-light text-dark border py-1.5 px-2.5 fw-medium">Wireframing</span>
-                <span class="badge bg-light text-dark border py-1.5 px-2.5 fw-medium">Prototyping</span>
-                <span class="badge bg-light text-dark border py-1.5 px-2.5 fw-medium">Web Design</span>
-                <span class="badge bg-light text-dark border py-1.5 px-2.5 fw-medium">Design Systems</span>
-              </div>
-            </div>
-
+        <section class="py-5 border-bottom">
+          <div class="text-center mb-5">
+            <h2 class="h2">Three simple steps to the perfect resume</h2>
+            <p class="text-muted">The creation process is as fast and intuitive as possible</p>
           </div>
-        </div>
+          <div class="row g-4">
+            <div class="col-md-4 text-center">
+              <div class="step-icon bg-light-blue text-primary mx-auto mb-3 fs-3 fw-bold">1</div>
+              <h5 class="fw-bold">Choose a style</h5>
+              <p class="text-muted px-lg-3">Find the template that best suits your profession: from insurance classics
+                to
+                creative layouts.</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="step-icon bg-light-blue text-primary mx-auto mb-3 fs-3 fw-bold">2</div>
+              <h5 class="fw-bold">Fill in the details</h5>
+              <p class="text-muted px-lg-3">Fill in the data in your personal work profile</p>
+            </div>
+            <div class="col-md-4 text-center">
+              <div class="step-icon bg-light-blue text-primary mx-auto mb-3 fs-3 fw-bold">3</div>
+              <h5 class="fw-bold">Download PDF</h5>
+              <p class="text-muted px-lg-3">Review your finished CV and instantly download the file, fully
+                ATS-ready.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-5 border-bottom">
+          <div class="row g-4 align-items-center">
+            <div class="col-md-6">
+              <h2 class="fw-semibold">Why choose our platform?</h2>
+              <p class="text-muted">We combine professional design with modern AI-assisted content creation to ensure
+                your CV stands out.</p>
+            </div>
+            <div class="col-md-6">
+              <ul class="list-unstyled">
+                <li class="mb-3"><strong>✓ ATS Optimized:</strong> All templates are tested to be parsed correctly by
+                  tracking systems.
+                </li>
+                <li class="mb-3"><strong>✓ Smart Suggestions:</strong> Get helpful tips on what to write in every
+                  section.
+                </li>
+                <li><strong>✓ Privacy First:</strong> Your data is stored securely and never shared with third parties.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="py-5 rounded text-center">
+          <h3 class="mb-4">Ready to land your dream job?</h3>
+          <p class="mb-4">Join thousands of job seekers who have successfully created their resumes with CVForge.</p>
+          <a href="{% url "catalog:catalog" %}" class="btn btn-light-blue btn-lg px-4 shadow-sm">Get Started Now</a>
+        </section>
       </div>
     </div>
-  </section>
-
-  <section class="py-5">
-    <div class="container py-4">
-      <div class="text-center mb-5">
-        <h2 class="h2">Three simple steps to the perfect resume</h2>
-        <p class="text-muted">The creation process is as fast and intuitive as possible</p>
-      </div>
-      <div class="row g-4">
-        <div class="col-md-4 text-center">
-          <div class="step-icon bg-primary-subtle text-primary mx-auto mb-3 fs-3 fw-bold">1</div>
-          <h5 class="fw-bold">Choose a style</h5>
-          <p class="text-muted px-lg-3">Find the template that best suits your profession: from insurance classics to
-            creative layouts.</p>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="step-icon bg-primary-subtle text-primary mx-auto mb-3 fs-3 fw-bold">2</div>
-          <h5 class="fw-bold">Fill in the details</h5>
-          <p class="text-muted px-lg-3">Fill in the data in your personal work profile</p>
-        </div>
-        <div class="col-md-4 text-center">
-          <div class="step-icon bg-primary-subtle text-primary mx-auto mb-3 fs-3 fw-bold">3</div>
-          <h5 class="fw-bold">Download PDF</h5>
-          <p class="text-muted px-lg-3">Review your finished CV and instantly download the file, fully ATS-ready.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
 {% endblock %}

@@ -38,6 +38,10 @@ body {
     background-color: #f6f6f6;
 }
 
+.bg-light-blue {
+    background-color: #90CAF9;
+}
+
 .custom-hover-card {
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
@@ -49,7 +53,6 @@ body {
 
 .card-img-wrapper {
     width: 100%;
-    /* Задаємо пропорцію (наприклад, 3:4 або 16:9), щоб висота підлаштовувалася під ширину */
     aspect-ratio: 3 / 4;
     overflow: hidden;
     position: relative;
@@ -58,7 +61,6 @@ body {
 .card-img-wrapper img {
     width: 100%;
     height: 100%;
-    /* Cover гарантує, що фото заповнить весь блок, а top — що ми бачимо верхню частину резюме */
     object-fit: cover;
     object-position: top;
     display: block;
