@@ -1,12 +1,13 @@
 import os
 from pathlib import Path
+from urllib.parse import urlparse
 
 import cloudinary
 from dotenv import load_dotenv
 
 load_dotenv()
 
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 cloudinary.config(
     cloud_name=os.environ.get("CLOUDINARY_CLOUD_NAME"),
@@ -15,20 +16,6 @@ cloudinary.config(
 )
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-
-DEBUG = os.environ.get("DJANGO_DEBUG", "True") == "True"
-
-allowed_host_str = os.environ.get("DJANGO_ALLOWED_HOST", "127.0.0.1,localhost").split(",")
-
-ALLOWED_HOSTS = [host.strip() for host in allowed_host_str]
-
-if not DEBUG:
-    SECURE_HSTS_SECONDS = 60 * 60 * 24 * 365
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -117,13 +104,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "config.wsgi.application"
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
 
 
 AUTH_PASSWORD_VALIDATORS = [
