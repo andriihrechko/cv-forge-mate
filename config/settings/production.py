@@ -4,10 +4,11 @@ from .base import *
 
 DEBUG = False
 
-allowed_host_str = os.environ.get("DJANGO_ALLOWED_HOST", "127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = [host.strip() for host in allowed_host_str]
-
+RENDER_EXTERNAL_HOSTNAME = os.environ.get("RENDER_EXTERNAL_HOSTNAME")
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 DATABASES = {
     "default": {
