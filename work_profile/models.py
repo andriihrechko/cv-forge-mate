@@ -51,7 +51,7 @@ class Skill(models.Model):
     type = models.CharField(
         max_length=20, choices=SkillChoice.choices, default=SkillChoice.PYTHON
     )
-    experience = models.IntegerField(blank=True, null=True)
+    experience = models.PositiveIntegerField(default=1)
 
     class Meta:
         constraints = [
